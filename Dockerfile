@@ -1,3 +1,3 @@
 FROM clamav/clamav:1.4
-RUN printf 'TCPSocket 3310\nTCPAddr ::\n' >> /etc/clamav/clamd.conf
+RUN sed -i '/TCPSocket/d; /TCPAddr/d' /etc/clamav/clamd.conf && printf 'TCPSocket 3310\nTCPAddr 0.0.0.0\n' >> /etc/clamav/clamd.conf
 ENTRYPOINT ["/init"]
